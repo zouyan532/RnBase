@@ -5,16 +5,15 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {Dimensions, Image, Platform, View, TouchableOpacity, PixelRatio, Text} from "react-native";
-import {navigateToSecond} from '../../redux/actions/navigator/Navigator';
+import {back} from '../../redux/actions/navigator/Navigator';
 
 export const deviceWidth = Dimensions.get('window').width;      //设备的宽度
 export const deviceHeight = Dimensions.get('window').height;    //设备的高度
 import API from "../../utils/API";
 import ScreenUtil from "../../utils/ScreenUtil";
 import Store from 'react-native-simple-store';
-import Util from "../../utils/Util";
 
-class GuidePage extends Component {
+class SecondPage extends Component {
     static navigationOptions = {
         header: null
     }
@@ -28,25 +27,6 @@ class GuidePage extends Component {
     }
 
     componentDidMount() {
-        const willFocusSubscription = this.props.navigation.addListener(
-            'willFocus',
-            payload => {
-                // console.debug('didBlur', payload);
-                Util.showToast("获得焦点触发？")
-            }
-        );
-        const willBlurSubscription = this.props.navigation.addListener(
-            'willBlur',
-            payload => {
-                // console.debug('didBlur', payload);
-                Util.showToast("失去焦点触发？")
-            }
-        );
-    }
-
-    componentWillUnmount() {
-        willFocusSubscription.remove()
-        willBlurSubscription.remove()
     }
 
     render() {
@@ -60,10 +40,10 @@ class GuidePage extends Component {
             >
                 <TouchableOpacity
                     onPress={()=>{
-                        this.props.navigateToSecond()
+                        this.props.back()
                     }}
                 >
-                    <Text>demo</Text>
+                    <Text>secondPage</Text>
                 </TouchableOpacity>
             </View>
 
@@ -79,8 +59,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        navigateToSecond:navigateToSecond
+        back:back
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GuidePage);
+export default connect(mapStateToProps, mapDispatchToProps)(SecondPage);

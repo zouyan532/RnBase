@@ -1,9 +1,9 @@
 /**
  * Created by jason.gong on 2018/09/10.
  */
-import {NavigationActions} from 'react-navigation';
+import {StackActions,NavigationActions} from 'react-navigation';
 
-import {AppNavigator} from '../../../containers/App';
+import {PrimaryNav} from '../../../containers/AppNavigator';
 import * as types from '../../../constant/ActionTypes';
 import GuidePage from "../../../containers/mainScreen/GuidePage";
 import Store from 'react-native-simple-store';
@@ -19,7 +19,7 @@ function getRouteName(type) {
 
 
 //默认页面
-const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams("GuidePage"));//GuidePage
+const initialState = PrimaryNav.router.getStateForAction(PrimaryNav.router.getActionForPathAndParams("GuidePage"));//GuidePage
 
 /**
  * According to the type, navigate to the layout screen of matching
@@ -36,6 +36,20 @@ export default nav = (state = initialState, action) => {
     }
 
     switch (action.type) {
+        case types.NA_SECOND:
+            nextState = PrimaryNav.router.getStateForAction(
+                StackActions.push({
+                    routeName:"SecondPage"
+                }),
+                state
+            )
+            break;
+        case types.BACK:
+            nextState = PrimaryNav.router.getStateForAction(
+                StackActions.popToTop(),
+                state
+            );
+            break;
     }
 
     return nextState || state;

@@ -12,6 +12,13 @@ export const back = () => {
     }
 }
 
+export const navigateToSecond = ()=>{
+    return{
+        type:types.NA_SECOND
+    }
+
+}
+
 
 
 

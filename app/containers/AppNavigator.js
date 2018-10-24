@@ -1,11 +1,13 @@
 import { createStackNavigator } from 'react-navigation'
 import { createReactNavigationReduxMiddleware, reduxifyNavigator } from 'react-navigation-redux-helpers'
 import GuidePage from './mainScreen/GuidePage';
+import SecondPage from './mainScreen/SecondPage';
 // import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 export const PrimaryNav = createStackNavigator({
-    GuidePage: { screen: GuidePage }
+    GuidePage: { screen: GuidePage },
+    SecondPage: { screen: SecondPage },
 }, {
     // Default config for all screens
     headerMode: 'none',
